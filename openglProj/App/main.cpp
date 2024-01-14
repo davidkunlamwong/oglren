@@ -49,21 +49,7 @@ int main(int argc, const char * argv[]) {
     auto fragmentShader = glw::Shader(GL_FRAGMENT_SHADER, "./Shader/fragmentShader.frag");
     fragmentShader.compile();
     
-    unsigned int shaderProgram;
-    shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-    int success;
-    char infolog[512];
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if(!success) {
-        glGetProgramInfoLog(shaderProgram, 512, NULL, infolog);
-        std::cout << "ERROR::SHADER::PROGRAM::LINK_FAILED\n" << infolog << std::endl;
-    }
-    
-    vertexShader.release();
-    fragmentShader.release();
+    auto shaderProgram = glw::Program{vertexShader, fragmentShader};
     
     
     

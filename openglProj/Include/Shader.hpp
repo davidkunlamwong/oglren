@@ -2,6 +2,7 @@
 
 #include <OpenGL/OpenGL.h>
 #include <filesystem>
+#include <initializer_list>
 
 namespace glw {
 
@@ -26,15 +27,21 @@ public:
     Shader(GLenum type, std::filesystem::path pathToSource);
     
     bool compile() const;
-    void release();
+    void release() const;
     
     operator GLuint() const;
     
 };
 
-}
+class Program {
+private:
+    GLuint handle;
+    
+public:
+    Program() = delete;
+    Program(std::initializer_list<Shader> list);
+    
+    operator GLuint() const;
+};
 
-//class Program {
-//public:
-//    Program
-//}
+}

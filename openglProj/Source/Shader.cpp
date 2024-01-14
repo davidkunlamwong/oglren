@@ -53,11 +53,35 @@ bool Shader::compile() const {
     return static_cast<bool>(result);
 }
 
-void Shader::release() { 
+void Shader::release() const{ 
     glDeleteShader(handle);
     state = Shader::State::INVALID;
 }
 
+Program::Program(std::initializer_list<Shader> list) {
+    handle = glCreateProgram();
+    
+    for (auto& shader: list) {
+        glAttachShader(handle, shader);
+    }
+    
+    glLinkProgram(handle);
+    
+    GLint result;
+    glGetProgramiv(handle, GL_LINK_STATUS, &result);
+    
+    if (result == GL_FALSE) {
+        auto logBuffer = std::string{"", 512};
+        glGetShaderInfoLog(handle, 512, NULL, logBuffer.data());
+        std::cout << "Shader Link Error: " << logBuffer << std::endl;
+        throw std::runtime_error("Shader link error!");
+    }
+    
+    for (auto& shader: list) {
+        shader.release();
+    }
+}
 
-
-
+Program::operator GLuint() const{
+    return handle;
+}
