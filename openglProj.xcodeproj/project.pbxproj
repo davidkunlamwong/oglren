@@ -12,6 +12,7 @@
 		635D1D162B51EF64005453B5 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635D1D152B51EF64005453B5 /* AGL.framework */; };
 		635D1D182B51EFFE005453B5 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 635D1D172B51EFFE005453B5 /* libglfw.3.3.dylib */; };
 		635D1D1A2B51F20F005453B5 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 635D1D192B51F20F005453B5 /* glad.c */; };
+		63EC21602B540E1A00FC5E1A /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63EC215E2B540E1A00FC5E1A /* Shader.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,11 @@
 		635D1D152B51EF64005453B5 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = System/Library/Frameworks/AGL.framework; sourceTree = SDKROOT; };
 		635D1D172B51EFFE005453B5 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../opt/homebrew/Cellar/glfw/3.3.9/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		635D1D192B51F20F005453B5 /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glad.c; sourceTree = "<group>"; };
+		63EC215C2B540D8600FC5E1A /* vertexShader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = vertexShader.vert; sourceTree = "<group>"; };
+		63EC215D2B540D9800FC5E1A /* fragmentShader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fragmentShader.frag; sourceTree = "<group>"; };
+		63EC215E2B540E1A00FC5E1A /* Shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
+		63EC215F2B540E1A00FC5E1A /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		63EC21662B5419D800FC5E1A /* Assert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Assert.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,8 +75,11 @@
 		635D1D0A2B51EE0A005453B5 /* openglProj */ = {
 			isa = PBXGroup;
 			children = (
-				635D1D192B51F20F005453B5 /* glad.c */,
-				635D1D0B2B51EE0A005453B5 /* main.cpp */,
+				63EC21652B5413A200FC5E1A /* Shader */,
+				63EC21642B54138500FC5E1A /* Include */,
+				63EC21632B54135800FC5E1A /* Source */,
+				63EC21622B54134800FC5E1A /* App */,
+				63EC21612B54133500FC5E1A /* Lib */,
 			);
 			path = openglProj;
 			sourceTree = "<group>";
@@ -83,6 +92,48 @@
 				635D1D132B51EF1F005453B5 /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		63EC21612B54133500FC5E1A /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				635D1D192B51F20F005453B5 /* glad.c */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		63EC21622B54134800FC5E1A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				635D1D0B2B51EE0A005453B5 /* main.cpp */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		63EC21632B54135800FC5E1A /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				63EC215E2B540E1A00FC5E1A /* Shader.cpp */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		63EC21642B54138500FC5E1A /* Include */ = {
+			isa = PBXGroup;
+			children = (
+				63EC215F2B540E1A00FC5E1A /* Shader.hpp */,
+				63EC21662B5419D800FC5E1A /* Assert.hpp */,
+			);
+			path = Include;
+			sourceTree = "<group>";
+		};
+		63EC21652B5413A200FC5E1A /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				63EC215C2B540D8600FC5E1A /* vertexShader.vert */,
+				63EC215D2B540D9800FC5E1A /* fragmentShader.frag */,
+			);
+			path = Shader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				635D1D0C2B51EE0A005453B5 /* main.cpp in Sources */,
+				63EC21602B540E1A00FC5E1A /* Shader.cpp in Sources */,
 				635D1D1A2B51F20F005453B5 /* glad.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,6 +320,7 @@
 		635D1D102B51EE0A005453B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++23";
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
 					/opt/homebrew/Cellar/glfw/3.3.9/include,
@@ -277,6 +330,7 @@
 					"$(inherited)",
 					/opt/homebrew/Cellar/glfw/3.3.9/lib,
 				);
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -284,6 +338,7 @@
 		635D1D112B51EE0A005453B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++23";
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
 					/opt/homebrew/Cellar/glfw/3.3.9/include,
