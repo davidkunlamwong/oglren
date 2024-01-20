@@ -1,14 +1,15 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <chrono>
 
 #include "Shader.hpp"
 
 float vertices[] = {
-     0.5f,  0.5f, 0.0f,  // top right
-     0.5f, -0.5f, 0.0f,  // bottom right
-    -0.5f, -0.5f, 0.0f,  // bottom left
-    -0.5f,  0.5f, 0.0f   // top left
+     1.0f,  1.0f, 0.0f,  // top right
+     1.0f, -1.0f, 0.0f,  // bottom right
+    -1.0f, -1.0f, 0.0f,  // bottom left
+    -1.0f,  1.0f, 0.0f   // top left
 };
 unsigned int indices[] = {  // note that we start from 0!
     0, 1, 3,   // first triangle
@@ -51,7 +52,7 @@ int main(int argc, const char * argv[]) {
     
     auto shaderProgram = glw::Program{vertexShader, fragmentShader};
     
-    
+    auto timeUniformLocation = glGetUniformLocation(shaderProgram, "time");
     
     unsigned int VBO;
     glGenBuffers(1, &VBO);
@@ -75,7 +76,15 @@ int main(int argc, const char * argv[]) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     
     
+    auto start = std::chrono::system_clock::now();
+    auto current = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed = current - start;
+    
+    
     while (!glfwWindowShouldClose(window)) {
+        current = std::chrono::system_clock::now();
+        elapsed = current - start;
+        
         glClearColor(0.13f, 0.04f, 0.022f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         
@@ -83,6 +92,9 @@ int main(int argc, const char * argv[]) {
         // 4. draw the object
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
+        
+        glUniform1f(timeUniformLocation, elapsed.count());
+        
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         
         glfwSwapBuffers(window);

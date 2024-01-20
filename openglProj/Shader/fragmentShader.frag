@@ -3,7 +3,9 @@
 out vec4 FragColor;
 in vec4 vertexColor;
 
+uniform float time;
+
 void main()
 {
-   FragColor = vertexColor;
+   FragColor = vec4(fract(abs(vertexColor.rgb)+time), 1.0f);
 }
