@@ -27,7 +27,7 @@ int main(int argc, const char * argv[]) {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(800, 800, "OGL", NULL, NULL);
     if (!window) {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -47,7 +47,7 @@ int main(int argc, const char * argv[]) {
     auto vertexShader = glw::Shader(GL_VERTEX_SHADER, "./Shader/vertexShader.vert");
     vertexShader.compile();
     
-    auto fragmentShader = glw::Shader(GL_FRAGMENT_SHADER, "./Shader/fragmentShader.frag");
+    auto fragmentShader = glw::Shader(GL_FRAGMENT_SHADER, "./Shader/raymarch.frag");
     fragmentShader.compile();
     
     auto shaderProgram = glw::Program{vertexShader, fragmentShader};
@@ -78,12 +78,17 @@ int main(int argc, const char * argv[]) {
     
     auto start = std::chrono::system_clock::now();
     auto current = std::chrono::system_clock::now();
+    auto last = current;
     std::chrono::duration<double> elapsed = current - start;
-    
+    std::chrono::duration<double> frameTime = current - last;
     
     while (!glfwWindowShouldClose(window)) {
         current = std::chrono::system_clock::now();
         elapsed = current - start;
+        
+//        frameTime = current - last;
+//        last = current;
+//        std::cout << 1.0f / frameTime.count() << " fps\n";
         
         glClearColor(0.13f, 0.04f, 0.022f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);

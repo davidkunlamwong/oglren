@@ -28,6 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		632BCECA2B655F19006F8EE8 /* raymarch.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = raymarch.frag; sourceTree = "<group>"; };
 		635D1D082B51EE0A005453B5 /* openglProj */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = openglProj; sourceTree = BUILT_PRODUCTS_DIR; };
 		635D1D0B2B51EE0A005453B5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		635D1D132B51EF1F005453B5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -132,6 +133,7 @@
 			children = (
 				63EC215C2B540D8600FC5E1A /* vertexShader.vert */,
 				63EC215D2B540D9800FC5E1A /* fragmentShader.frag */,
+				632BCECA2B655F19006F8EE8 /* raymarch.frag */,
 			);
 			path = Shader;
 			sourceTree = "<group>";
